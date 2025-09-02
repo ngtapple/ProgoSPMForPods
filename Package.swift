@@ -13,19 +13,10 @@ let package = Package(
         ),
     ],
     dependencies: [
-        // Pod 'STPopup'
-        .package(url: "https://github.com/ngtapple/STPopup.git", branch: "master"),
-        
-        // Diğer bağımlılıklar için de aynı şekilde "branch: "master"" ekleyin.
-        .package(url: "https://github.com/ngtapple/SwiftValidator.git", branch: "master"),
-        .package(url: "https://github.com/ngtapple/Presentr.git", branch: "master"),
-        .package(url: "https://github.com/ngtapple/DZNEmptyDataSet.git", branch: "master"),
-        .package(url: "https://github.com/ngtapple/PopupController.git", branch: "master"),
-        .package(url: "https://github.com/ngtapple/CFAlertViewController.git", branch: "master"),
-        .package(url: "https://github.com/ngtapple/Spring.git", branch: "master"),
-        .package(url: "https://github.com/ngtapple/CountryPicker.git", branch: "master"),
+        // Bu kısım boş kalmalı çünkü Pod'ların kaynak kodları zaten paketin içinde.
     ],
     targets: [
+        // Bu hedef, tüm Pod'ları bir araya getiren sarmalayıcıdır.
         .target(
             name: "ProgoSPMForPods",
             dependencies: [
@@ -33,5 +24,16 @@ let package = Package(
                 "PopupController", "CFAlertViewController", "Spring", "CountryPicker"
             ]
         ),
+
+        // Her bir Pod için ayrı bir hedef oluşturmalısınız.
+        // SPM, bu hedefleri Sources klasörünüzdeki klasör isimleriyle eşleştirir.
+        .target(name: "STPopup"),
+        .target(name: "SwiftValidator"),
+        .target(name: "Presentr"),
+        .target(name: "DZNEmptyDataSet"),
+        .target(name: "PopupController"),
+        .target(name: "CFAlertViewController"),
+        .target(name: "Spring"),
+        .target(name: "CountryPicker")
     ]
 )
