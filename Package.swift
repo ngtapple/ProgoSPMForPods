@@ -1,23 +1,37 @@
 // swift-tools-version: 6.2
-// The swift-tools-version declares the minimum version of Swift required to build this package.
-
 import PackageDescription
 
 let package = Package(
     name: "ProgoSPMForPods",
+    platforms: [
+        .iOS(.v13)
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "ProgoSPMForPods",
             targets: ["ProgoSPMForPods"]
         ),
     ],
+    dependencies: [
+        // Pod 'STPopup'
+        .package(url: "https://github.com/ngtapple/STPopup.git", branch: "master"),
+        
+        // Diğer bağımlılıklar için de aynı şekilde "branch: "master"" ekleyin.
+        .package(url: "https://github.com/ngtapple/SwiftValidator.git", branch: "master"),
+        .package(url: "https://github.com/ngtapple/Presentr.git", branch: "master"),
+        .package(url: "https://github.com/ngtapple/DZNEmptyDataSet.git", branch: "master"),
+        .package(url: "https://github.com/ngtapple/PopupController.git", branch: "master"),
+        .package(url: "https://github.com/ngtapple/CFAlertViewController.git", branch: "master"),
+        .package(url: "https://github.com/ngtapple/Spring.git", branch: "master"),
+        .package(url: "https://github.com/ngtapple/CountryPicker.git", branch: "master"),
+    ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "ProgoSPMForPods"
+            name: "ProgoSPMForPods",
+            dependencies: [
+                "STPopup", "SwiftValidator", "Presentr", "DZNEmptyDataSet",
+                "PopupController", "CFAlertViewController", "Spring", "CountryPicker"
+            ]
         ),
-
     ]
 )
