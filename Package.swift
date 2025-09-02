@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "ProgoSPMForPods",
+    defaultLocalization: "en", // Hatanın çözümü için bu satır eklendi
     platforms: [
         .iOS(.v13)
     ],
@@ -13,27 +14,28 @@ let package = Package(
         ),
     ],
     dependencies: [
-        // Bu kısım boş kalmalı çünkü Pod'ların kaynak kodları zaten paketin içinde.
+        // Bu kısım boş kalmalıdır.
     ],
     targets: [
-        // Bu hedef, tüm Pod'ları bir araya getiren sarmalayıcıdır.
         .target(
             name: "ProgoSPMForPods",
             dependencies: [
-                "STPopup", "SwiftValidator", "Presentr", "DZNEmptyDataSet",
+                "STPopup-Objc", "SwiftValidator", "Presentr",
                 "PopupController", "CFAlertViewController", "Spring", "CountryPicker"
             ]
         ),
+        
+        .target(
+            name: "STPopup-Objc",
+            path: "Sources/STPopup"
+        ),
 
-        // Her bir Pod için ayrı bir hedef oluşturmalısınız.
-        // SPM, bu hedefleri Sources klasörünüzdeki klasör isimleriyle eşleştirir.
-        .target(name: "STPopup"),
-        .target(name: "SwiftValidator"),
-        .target(name: "Presentr"),
-        .target(name: "DZNEmptyDataSet"),
-        .target(name: "PopupController"),
-        .target(name: "CFAlertViewController"),
-        .target(name: "Spring"),
-        .target(name: "CountryPicker")
+        // Diğer Pod'lar için ayrı hedefler
+        .target(name: "SwiftValidator", path: "Sources/SwiftValidator"),
+        .target(name: "Presentr", path: "Sources/Presentr"),
+        .target(name: "PopupController", path: "Sources/PopupController"),
+        .target(name: "CFAlertViewController", path: "Sources/CFAlertViewController"),
+        .target(name: "Spring", path: "Sources/Spring"),
+        .target(name: "CountryPicker", path: "Sources/CountryPicker")
     ]
 )
