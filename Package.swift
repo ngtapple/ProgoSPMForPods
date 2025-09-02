@@ -20,14 +20,14 @@ let package = Package(
         .target(
             name: "ProgoSPMForPods",
             dependencies: [
-                "STPopup-Objc", "SwiftValidator", "Presentr",
+                "STPopup", "SwiftValidator", "Presentr",
                 "PopupController", "CFAlertViewController", "Spring", "CountryPicker"
             ]
         ),
         
         .executableTarget(
-            name: "STPopup-Objc",
-            path: "Sources/STPopup"
+            name: "STPopup",
+            path: "Sources/STPopup/STPopup"
         ),
 
         // Diğer Pod'lar için ayrı hedefler
@@ -36,6 +36,6 @@ let package = Package(
         .target(name: "PopupController", path: "Sources/PopupController"),
         .target(name: "CFAlertViewController", path: "Sources/CFAlertViewController"),
         .target(name: "Spring", path: "Sources/Spring"),
-        .executableTarget(name: "CountryPicker", path: "Sources/CountryPicker")
+        .executableTarget(name: "CountryPicker", path: "Sources/CountryPicker/CountryPicker")
     ]
 )
