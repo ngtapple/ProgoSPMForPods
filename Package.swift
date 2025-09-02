@@ -25,7 +25,7 @@ let package = Package(
             ]
         ),
         
-        .target(
+        .executableTarget(
             name: "STPopup-Objc",
             path: "Sources/STPopup"
         ),
@@ -36,6 +36,6 @@ let package = Package(
         .target(name: "PopupController", path: "Sources/PopupController"),
         .target(name: "CFAlertViewController", path: "Sources/CFAlertViewController"),
         .target(name: "Spring", path: "Sources/Spring"),
-        .target(name: "CountryPicker", path: "Sources/CountryPicker")
+        .executableTarget(name: "CountryPicker", path: "Sources/CountryPicker")
     ]
 )
