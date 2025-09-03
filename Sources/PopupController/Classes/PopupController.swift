@@ -36,7 +36,8 @@ open class PopupController: UIViewController {
     public enum PopupLayout {
         case top, center, bottom
         
-        func origin(_ view: UIView, size: CGSize = UIScreen.main.bounds.size) -> CGPoint {
+        @MainActor
+        func origin(_ view: UIView, size: CGSize) -> CGPoint {
             switch self {
             case .top: return CGPoint(x: (size.width - view.frame.width) / 2, y: 0)
             case .center: return CGPoint(x: (size.width - view.frame.width) / 2, y: (size.height - view.frame.height) / 2)
@@ -240,9 +241,9 @@ private extension PopupController {
     func updateLayouts() {
         guard let child = self.children.last as? PopupContentViewController else { return }
         popupView.frame.size = child.sizeForPopup(self, size: maximumSize, showingKeyboard: isShowingKeyboard)
-        popupView.frame.origin.x = layout.origin(popupView).x
+        popupView.frame.origin.x = layout.origin(popupView, size: UIScreen.main.bounds.size).x
         baseScrollView.frame = view.frame
-        baseScrollView.contentInset.top = layout.origin(popupView).y
+        baseScrollView.contentInset.top = layout.origin(popupView, size: UIScreen.main.bounds.size).y
         defaultContentOffset.y = -baseScrollView.contentInset.top
     }
     
@@ -311,7 +312,7 @@ private extension PopupController {
         }
 
         popupView.frame.size = childViewController.sizeForPopup(self, size: maximumSize, showingKeyboard: isShowingKeyboard)
-        popupView.frame.origin.x = layout.origin(popupView!).x
+        popupView.frame.origin.x = layout.origin(popupView, size: UIScreen.main.bounds.size).x
         
         switch animation {
         case .fadeIn:
@@ -335,7 +336,7 @@ private extension PopupController {
         }
         
         popupView.frame.size = child.sizeForPopup(self, size: maximumSize, showingKeyboard: isShowingKeyboard)
-        popupView.frame.origin.x = layout.origin(popupView).x
+        popupView.frame.origin.x = layout.origin(popupView, size: UIScreen.main.bounds.size).x
         
         switch animation {
         case .fadeIn:
@@ -360,7 +361,7 @@ private extension PopupController {
         guard movesAlongWithKeyboard else {
             return false
         }
-        return (popupView.frame.maxY + layout.origin(popupView).y) > origin.y
+        return (popupView.frame.maxY + layout.origin(popupView, size: UIScreen.main.bounds.size).y) > origin.y
     }
     
     func move(_ origin: CGPoint) {
@@ -378,7 +379,7 @@ private extension PopupController {
             return
         }
         popupView.frame.size = child.sizeForPopup(self, size: maximumSize, showingKeyboard: isShowingKeyboard)
-        baseScrollView.contentInset.top = layout.origin(popupView).y
+        baseScrollView.contentInset.top = layout.origin(popupView, size: UIScreen.main.bounds.size).y
         defaultContentOffset.y = -baseScrollView.contentInset.top
     }
     
@@ -394,7 +395,7 @@ private extension PopupController {
 private extension PopupController {
     
     func fadeIn(_ layout: PopupLayout, completion: @escaping () -> Void) {
-        baseScrollView.contentInset.top = layout.origin(popupView).y
+        baseScrollView.contentInset.top = layout.origin(popupView, size: UIScreen.main.bounds.size).y
         
         view.isHidden = false
         popupView.alpha = 0.0
@@ -413,14 +414,14 @@ private extension PopupController {
     func slideUp(_ layout: PopupLayout, completion: @escaping () -> Void) {
         view.isHidden = false
         baseScrollView.backgroundColor = UIColor.clear
-        baseScrollView.contentInset.top = layout.origin(popupView).y
+        baseScrollView.contentInset.top = layout.origin(popupView, size: UIScreen.main.bounds.size).y
         baseScrollView.contentOffset.y = -UIScreen.main.bounds.height
         
         UIView.animate(
             withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveLinear, animations: { () -> Void in
                 
                 self.updateBackgroundStyle(self.backgroundStyle)
-                self.baseScrollView.contentOffset.y = -layout.origin(self.popupView).y
+                self.baseScrollView.contentOffset.y = -layout.origin(self.popupView, size: UIScreen.main.bounds.size).y
                 self.defaultContentOffset = self.baseScrollView.contentOffset
             }, completion: { (isFinished) -> Void in
                 completion()
@@ -430,14 +431,14 @@ private extension PopupController {
     func slideDown(_ layout: PopupLayout, completion: @escaping () -> Void) {
         view.isHidden = false
         baseScrollView.backgroundColor = UIColor.clear
-        baseScrollView.contentInset.top = layout.origin(popupView).y
+        baseScrollView.contentInset.top = layout.origin(popupView, size: UIScreen.main.bounds.size).y
         baseScrollView.contentOffset.y = self.popupView.frame.size.height
 
         UIView.animate(
             withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveLinear, animations: { () -> Void in
 
                 self.updateBackgroundStyle(self.backgroundStyle)
-                self.baseScrollView.contentOffset.y = -layout.origin(self.popupView).y
+                self.baseScrollView.contentOffset.y = -layout.origin(self.popupView, size: UIScreen.main.bounds.size).y
                 self.defaultContentOffset = self.baseScrollView.contentOffset
         }, completion: { (isFinished) -> Void in
             completion()

@@ -684,14 +684,11 @@ open class CFAlertViewController: UIViewController    {
         // Remove KVO
         tableView?.removeObserver(self, forKeyPath: "contentSize")
         
-        // Remove Dismiss Handler
-        dismissHandler = nil
-        
     }
 }
 
 
-extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFAlertActionTableViewCellDelegate {
+extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, @MainActor CFAlertActionTableViewCellDelegate {
     
     // MARK: - UITableViewDataSource
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -809,7 +806,7 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
 
 
 // MARK: - CFAlertInteractiveTransitionDelegate
-extension CFAlertViewController: CFAlertInteractiveTransitionDelegate  {
+extension CFAlertViewController: @MainActor CFAlertInteractiveTransitionDelegate  {
     
     public func alertViewControllerTransitionDidFinish(_ transition: CFAlertBaseInteractiveTransition) {
         

@@ -184,7 +184,6 @@ open class CFPushButton: UIButton {
     deinit {
         
         // Remove Touch Handlers
-        touchDownHandler = nil
-        touchUpHandler = nil
+        
     }
 }

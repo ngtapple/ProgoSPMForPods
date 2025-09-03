@@ -141,7 +141,7 @@ public class Presentr: NSObject {
      - parameter animated:     Animation boolean.
      - parameter completion:   Completion block.
      */
-    fileprivate func presentViewController(presentingViewController presentingVC: UIViewController, presentedViewController presentedVC: UIViewController, animated: Bool, completion: (() -> Void)?) {
+    @MainActor fileprivate func presentViewController(presentingViewController presentingVC: UIViewController, presentedViewController presentedVC: UIViewController, animated: Bool, completion: (() -> Void)?) {
         presentedVC.transitioningDelegate = self
         presentedVC.modalPresentationStyle = .custom
         presentingVC.present(presentedVC, animated: animated, completion: completion)
@@ -175,7 +175,7 @@ extension Presentr: UIViewControllerTransitioningDelegate {
 
     // MARK: - Private Helper's
 
-    fileprivate func presentationController(_ presented: UIViewController, presenting: UIViewController?) -> PresentrController {
+    @MainActor fileprivate func presentationController(_ presented: UIViewController, presenting: UIViewController?) -> PresentrController {
         return PresentrController(presentedViewController: presented,
                                     presentingViewController: presenting,
                                     presentationType: presentationType,

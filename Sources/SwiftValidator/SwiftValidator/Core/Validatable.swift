@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public typealias ValidatableField = AnyObject & Validatable
 
@@ -17,14 +18,14 @@ public protocol Validatable {
     }
 }
 
-extension UITextField: Validatable {
+extension UITextField: @MainActor Validatable {
     
     open var validationText: String {
         return text ?? ""
     }
 }
 
-extension UITextView: Validatable {
+extension UITextView: @MainActor Validatable {
     
     public var validationText: String {
         return text ?? ""

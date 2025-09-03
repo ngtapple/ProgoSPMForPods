@@ -66,7 +66,7 @@ class DemoPopupViewController3: UIViewController {
     }
 }
 
-extension DemoPopupViewController3: PopupContentViewController {
+extension DemoPopupViewController3: @MainActor PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
         return UIScreen.main.bounds.size
     }

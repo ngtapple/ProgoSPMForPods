@@ -22,7 +22,7 @@
 
 import UIKit
 
-open class SpringImageView: UIImageView, Springable {
+open class SpringImageView: UIImageView, @MainActor Springable {
     @IBInspectable public var autostart: Bool = false
     @IBInspectable public var autohide: Bool = false
     @IBInspectable public var animation: String = ""

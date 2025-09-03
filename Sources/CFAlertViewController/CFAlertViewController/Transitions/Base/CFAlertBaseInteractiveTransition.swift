@@ -136,7 +136,7 @@ open class CFAlertBaseInteractiveTransition: UIPercentDrivenInteractiveTransitio
     // MARK: - Memory Management
     deinit {
         NotificationCenter.default.removeObserver(self)
-        transitionContext = nil
+        
     }
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DemoPopupViewController2: UIViewController, PopupContentViewController, UITableViewDataSource {
+class DemoPopupViewController2: UIViewController, @MainActor PopupContentViewController, UITableViewDataSource {
 
     var fruits = [
         ("Apple", UIColor.red),

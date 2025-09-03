@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftValidator
 
-class ViewController: UIViewController , ValidationDelegate, UITextFieldDelegate {
+class ViewController: UIViewController , @MainActor ValidationDelegate, UITextFieldDelegate {
 
     // TextFields
     @IBOutlet weak var fullNameTextField: UITextField!

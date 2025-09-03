@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DemoPopupViewController1: UIViewController, PopupContentViewController {
+class DemoPopupViewController1: UIViewController, @MainActor PopupContentViewController {
 
     var closeHandler: (() -> Void)?
 

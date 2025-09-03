@@ -31,7 +31,7 @@ class DemoPopupViewController: UIViewController {
 
 }
 
-extension DemoPopupViewController: PopupContentViewController {
+extension DemoPopupViewController: @MainActor PopupContentViewController {
     func sizeForPopup(_ popupController: PopupController, size: CGSize, showingKeyboard: Bool) -> CGSize {
         return CGSize(width: 300, height: 400)
     }

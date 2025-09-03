@@ -15,12 +15,17 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.8.7</string>
+	<string>1.1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Montserrat-Regular.ttf</string>
+		<string>SourceSansPro-Regular.ttf</string>
+	</array>
 </dict>
 </plist>
